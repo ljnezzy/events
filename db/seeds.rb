@@ -113,3 +113,10 @@ Event.create!([
     capacity: 30
   }
 ])
+
+event = Event.find_by(name: 'BugSmash')
+event.registrations.create!(name: "Larry", email: "larry@stooges.com", how_heard: 'Newsletter')
+event.registrations.create!(name: "Moe", email: "moe@stooges.com", how_heard: 'Blog Post')
+event.registrations.create!(name: "Curly", email: "curly@stooges.com", how_heard: 'Twitter')
+event = Event.find_by(name: 'Kata Camp')
+event.registrations.create!(name: "Moe", email: "moe@stooges.com", how_heard: 'Web Search')
