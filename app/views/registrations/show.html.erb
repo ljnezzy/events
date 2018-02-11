@@ -1,0 +1,26 @@
+<header id="content-header">
+  <h1>Registration for <%= @registration.name %> at <%= link_to @event.name, @event %></h1>
+</header>
+
+
+  <%= link_to pluralize(@event.name, 'Registration'),event_registrations_path(@event), class: 'button' %>
+
+
+<article id="event" class="event">
+  <h3>Email</h3>
+  <p>
+    <%= @registration.email %>
+  </p>
+  
+  <h3>How Heard</h3>
+  <p>
+    <%= @registration.how_heard %>
+  </p>
+</article>
+
+  <%= mail_to(@registration.email, 'Email', class: 'button') %>
+
+  <%= link_to 'Edit', edit_event_registration_path(@event, @registration), class: 'button' %>
+  <%= link_to 'Delete', [@event, @registration], 
+                  class: 'button',
+                  method: :delete, data: { confirm: 'Are you sure?' } %>
