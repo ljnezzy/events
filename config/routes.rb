@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+	resource :session
   root 'events#index'
   
 	resources :events do
