@@ -1,5 +1,7 @@
 class RegistrationsController < ApplicationController
-	before_action :set_event
+	
+  before_action :require_signin
+  before_action :set_event
 
 	def index
     #@event = Event.find(params[:event_id])
@@ -12,11 +14,10 @@ class RegistrationsController < ApplicationController
   end
 
 	def create
-	  @registration = 
-	    @event.registrations.new(registration_params)
+	  @registration = @event.registrations.new(registration_params)
+    @registration.user = current_user
 	  if @registration.save
-	    redirect_to event_registrations_url(@event), 
-	                notice: "Thanks for registering!"
+	    redirect_to event_registrations_url(@event),notice: "Thanks for registering!"
 	  else
 	    render :new
 	  end
@@ -49,10 +50,10 @@ class RegistrationsController < ApplicationController
 private
 
 	def registration_params
-	  params.require(:registration).permit(:name, :email, :how_heard)
+	  params.require(:registration).permit(:how_heard)
 	end
 
 	def set_event
-    	@event = Event.find(params[:event_id])
+    	@event = Event.find_by!(slug: params[:id])
   end
 end
