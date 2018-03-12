@@ -8,7 +8,7 @@ module EventsHelper
 	end
 
 	def image_for(event)
-	    if event.image_file_name.blank?
+	    if event.image_file_name && event.image_file_name.blank?
 	      image_tag 'placeholder.png'
 	    else
 	      image_tag event.image_file_name
